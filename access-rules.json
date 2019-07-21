@@ -1,0 +1,22 @@
+[
+  {
+    "id": "mattex-mmm-api",
+    "match": {
+      "url": "http://35.201.203.35/mattex-mmm/<.*>",
+      "methods": ["GET"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  },
+  {
+    "id": "oathkeeper-api",
+    "match": {
+      "url": "http://<[^/]+>/oathkeeper/<.*>",
+      "methods": ["GET"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  }
+]
