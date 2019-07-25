@@ -1,18 +1,58 @@
 [
   {
-    "id": "mattex-mmm-api",
+    "id": "mattex-identify-rule",
     "match": {
-      "url": "http://35.201.203.35/mattex-mmm/<.*>",
-      "methods": ["GET"]
+      "url": "http://dev-api.mattex.com.hk/login<.*>",
+      "methods": ["POST"]
     },
     "authenticators": [{ "handler": "anonymous" }],
     "authorizer": { "handler": "allow" },
     "mutator": { "handler": "noop" }
   },
   {
-    "id": "oathkeeper-api",
+    "id": "mattex-mmm-api-rule",
     "match": {
-      "url": "http://<[^/]+>/oathkeeper/<.*>",
+      "url": "http://dev-api.mattex.com.hk/mmm/<.*>",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "authenticators": [{
+      "handler": "jwt"
+    }],
+    "authorizer": { "handler": "allow" },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "X-User": "{{ print .Subject }}",
+          "X-Extra": "{{ print .Extra }}"
+        }
+      }
+    }
+  },
+  {
+    "id": "mattex-marketplace-api-rule",
+    "match": {
+      "url": "http://dev-api.mattex.com.hk/marketplace/<.*>",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "authenticators": [{
+      "handler": "jwt"
+    }],
+    "authorizer": { "handler": "allow" },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "X-User": "{{ print .Subject }}",
+          "X-Extra": "{{ print .Extra }}"
+        }
+      }
+    }
+  },
+  {
+    "id": "oathkeeper-api-rule",
+    "match": {
+      "url": "http://dev-api.mattex.com.hk/oathkeeper/<.*>",
       "methods": ["GET"]
     },
     "authenticators": [{ "handler": "anonymous" }],
@@ -20,3 +60,4 @@
     "mutator": { "handler": "noop" }
   }
 ]
+
