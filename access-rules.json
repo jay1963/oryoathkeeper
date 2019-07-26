@@ -1,25 +1,5 @@
 [
   {
-    "id": "well-known",
-    "match": {
-      "url": "<https|http>://<[^/]+>/.well-known/acme-challenge/<.*>",
-      "methods": ["GET"]
-    },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
-    "id": "mattex-identify-get",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/<.*>",
-      "methods": ["GET"]
-    },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
     "id": "mattex-identify-login",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/login<.*>",
