@@ -2,7 +2,7 @@
   {
     "id": "well-known",
     "match": {
-      "url": "http://.well-known/acme-challenge",
+      "url": "<https|http>://<[^/]+>/.well-known/acme-challenge/<.*>",
       "methods": ["GET"]
     },
     "authenticators": [{ "handler": "anonymous" }],
@@ -10,9 +10,9 @@
     "mutator": { "handler": "noop" }
   },
   {
-    "id": "mattex-api",
+    "id": "mattex-identify-get",
     "match": {
-      "url": "http://dev-api.mattex.com.hk/<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/<.*>",
       "methods": ["GET"]
     },
     "authenticators": [{ "handler": "anonymous" }],
@@ -20,10 +20,20 @@
     "mutator": { "handler": "noop" }
   },
   {
-    "id": "mattex-identify-rule",
+    "id": "mattex-identify-login",
     "match": {
-      "url": "http://dev-api.mattex.com.hk/login<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/login<.*>",
       "methods": ["POST"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  },
+  {
+    "id": "mattex-identify-account",
+    "match": {
+      "url": "<https|http>://dev-api.mattex.com.hk/account/<.*>",
+      "methods": ["POST", "GET"]
     },
     "authenticators": [{ "handler": "anonymous" }],
     "authorizer": { "handler": "allow" },
@@ -32,7 +42,7 @@
   {
     "id": "mattex-mmm-api-rule",
     "match": {
-      "url": "http://dev-api.mattex.com.hk/mmm/<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/mmm/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
     "authenticators": [{
@@ -52,7 +62,7 @@
   {
     "id": "mattex-marketplace-api-rule",
     "match": {
-      "url": "http://dev-api.mattex.com.hk/marketplace/<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/marketplace/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
     "authenticators": [{
@@ -72,7 +82,7 @@
   {
     "id": "oathkeeper-api-rule",
     "match": {
-      "url": "http://dev-api.mattex.com.hk/oathkeeper/<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/<.*>",
       "methods": ["GET"]
     },
     "authenticators": [{ "handler": "anonymous" }],
