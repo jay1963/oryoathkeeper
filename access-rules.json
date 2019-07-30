@@ -3,7 +3,7 @@
     "id": "mattex-identify-login",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/login<.*>",
-      "methods": ["POST"]
+      "methods": ["POST", "OPTIONS"]
     },
     "authenticators": [{ "handler": "anonymous" }],
     "authorizer": { "handler": "allow" },
@@ -13,7 +13,7 @@
     "id": "mattex-identify-account",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/account/<.*>",
-      "methods": ["POST", "GET"]
+      "methods": ["POST", "GET", "OPTIONS"]
     },
     "authenticators": [{ "handler": "anonymous" }],
     "authorizer": { "handler": "allow" },
