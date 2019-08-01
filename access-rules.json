@@ -41,6 +41,16 @@
     }
   },
   {
+    "id": "mattex-tms-rule",
+    "match": {
+      "url": "<https|http>://dev-tms.emat.mattex.com.hk<.*>",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  },
+  {
     "id": "mattex-mmm-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/mmm/<.*>",
