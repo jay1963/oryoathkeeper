@@ -61,6 +61,16 @@
     "mutator": { "handler": "noop" }
   },
   {
+    "id": "dev-operation-api-mattex-rule",
+    "match": {
+      "url": "<https|http>://dev-api.operation.mattex.com.hk<.*>",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  },
+  {
     "id": "mattex-mmm-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/mmm/<.*>",
