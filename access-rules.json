@@ -41,16 +41,6 @@
     }
   },
   {
-    "id": "mattex-tms-gateway-rule",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/tms/<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
-    },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
     "id": "operation-mattex-tms-rule",
     "match": {
       "url": "<https|http>://dev-tms.operation.mattex.com.hk<.*>",
@@ -61,19 +51,9 @@
     "mutator": { "handler": "noop" }
   },
   {
-    "id": "dev-operation-api-mattex-rule",
+    "id": "operation-mattex-mmm-api-rule",
     "match": {
-      "url": "<https|http>://dev-api.operation.mattex.com.hk<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
-    },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
-    "id": "mattex-mmm-api-rule",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/mmm/<.*>",
+      "url": "<https|http>://dev-api.operation.mattex.com.hk/mmm/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
     "authenticators": [{
