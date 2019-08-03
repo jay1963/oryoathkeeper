@@ -92,9 +92,9 @@
     }
   },
   {
-    "id": "mattex-marketplace-api-rule",
+    "id": "mattex-supplier-api-rule",
     "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/marketplace/<.*>",
+      "url": "<https|http>://dev-api.mattex.com.hk/supplier/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
     "authenticators": [{
