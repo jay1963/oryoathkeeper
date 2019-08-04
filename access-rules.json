@@ -103,6 +103,16 @@
     "mutator": { "handler": "noop" }
   },
   {
+    "id": "oathkeeper-api-decisions-rule",
+    "match": {
+      "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/decisions<.*>",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    },
+    "authenticators": [{ "handler": "anonymous" }],
+    "authorizer": { "handler": "allow" },
+    "mutator": { "handler": "noop" }
+  },
+  {
     "id": "oathkeeper-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/<.*>",
