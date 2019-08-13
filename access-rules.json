@@ -20,7 +20,7 @@
     "mutator": { "handler": "noop" }
   },
   {
-    "id": "mattex-identify-api-rule-optiion",
+    "id": "mattex-identify-api-rule-option",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/api/v1/<.*>",
       "methods": ["OPTIONS"]
