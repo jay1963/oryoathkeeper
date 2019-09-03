@@ -1,44 +1,99 @@
-[
-  {
-    "id": "mattex-identify-login",
+[{
+    "id": "mattex-frontend",
     "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/login<.*>",
-      "methods": ["POST", "OPTIONS"]
+      "methods": ["OPTIONS"],
+      "url": "<https|http>://dev-api.mattex.com.hk<.*>"
     },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
+    "authenticators": [{
+      "handler": "noop"
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "noop"
+    }
   },
   {
-    "id": "mattex-identify-account",
+    "id": "no-need-token",
     "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/account/<.*>",
-      "methods": ["POST", "GET", "OPTIONS"]
+      "methods": ["GET", "POST"],
+      "url": "<https|http>://dev-api.mattex.com.hk/<account|login|register|confirmation><.*>"
     },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
-    "id": "mattex-identify-api-rule-option",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/api/v1/<.*>",
-      "methods": ["OPTIONS"]
+    "authenticators": [{
+      "handler": "noop"
+    }],
+    "authorizer": {
+      "handler": "allow"
     },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
+    "mutator": {
+      "handler": "noop"
+    }
   },
   {
     "id": "mattex-identify-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/api/v1/<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "HEAD"]
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
     },
     "authenticators": [{
       "handler": "jwt"
     }],
-    "authorizer": { "handler": "allow" },
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "user": "{{ print .Subject }}",
+          "user_id": "{{ print .Extra.uid }}",
+          "domain": "{{ print .Extra.domain }}"
+        }
+      }
+    }
+  },
+  {
+    "id": "mattex-mmm-api-rule",
+    "match": {
+      "url": "<https|http>://dev-api.mattex.com.hk/mmm/api/v1/<.*>",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "authenticators": [{
+      "handler": "jwt",
+      "config": {
+        "required_scope": ["scope-a", "scope-b"]
+      }
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "user": "{{ print .Subject }}",
+          "user_id": "{{ print .Extra.uid }}",
+          "domain": "{{ print .Extra.domain }}"
+        }
+      }
+    }
+  },
+  {
+    "id": "mattex-supplier-api-rule",
+    "match": {
+      "url": "<https|http>://dev-api.mattex.com.hk/supplier/api/v1/<.*>",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "authenticators": [{
+      "handler": "jwt",
+      "config": {
+        "required_scope": ["scope-a", "scope-b"]
+      }
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
     "mutator": {
       "handler": "cookie",
       "config": {
@@ -54,52 +109,16 @@
     "id": "operation-mattex-tms-rule",
     "match": {
       "url": "<https|http>://dev-tms.operation.mattex.com.hk<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
-    },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
-  },
-  {
-    "id": "operation-mattex-mmm-api-rule",
-    "match": {
-      "url": "<https|http>://dev-api.operation.mattex.com.hk/mmm/<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
     },
     "authenticators": [{
-      "handler": "jwt"
+      "handler": "anonymous"
     }],
-    "authorizer": { "handler": "allow" },
-    "mutator": {
-      "handler": "cookie",
-      "config": {
-        "cookies": {
-          "user": "{{ print .Subject }}",
-          "user_id": "{{ print .Extra.uid }}",
-          "domain": "{{ print .Extra.domain }}"
-        }
-      }
-    }
-  },
-  {
-    "id": "mattex-supplier-api-rule",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/supplier/<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+    "authorizer": {
+      "handler": "allow"
     },
-    "authenticators": [{
-      "handler": "jwt"
-    }],
-    "authorizer": { "handler": "allow" },
     "mutator": {
-      "handler": "cookie",
-      "config": {
-        "cookies": {
-          "user": "{{ print .Subject }}",
-          "user_id": "{{ print .Extra.uid }}",
-          "domain": "{{ print .Extra.domain }}"
-        }
-      }
+      "handler": "noop"
     }
   },
   {
@@ -108,9 +127,15 @@
       "url": "<https|http>://dev-api.auth.mattex.com.hk<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
+    "authenticators": [{
+      "handler": "anonymous"
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "noop"
+    }
   },
   {
     "id": "oathkeeper-api-rule",
@@ -118,9 +143,14 @@
       "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
     },
-    "authenticators": [{ "handler": "anonymous" }],
-    "authorizer": { "handler": "allow" },
-    "mutator": { "handler": "noop" }
+    "authenticators": [{
+      "handler": "anonymous"
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "noop"
+    }
   }
 ]
-
