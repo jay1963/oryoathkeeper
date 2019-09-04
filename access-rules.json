@@ -1,5 +1,5 @@
 [{
-    "id": "mattex-frontend",
+    "id": "dev-emat-api-frontend",
     "match": {
       "methods": ["OPTIONS"],
       "url": "<https|http>://dev-api.mattex.com.hk<.*>"
@@ -15,7 +15,7 @@
     }
   },
   {
-    "id": "dev-no-need-token",
+    "id": "dev-emat-api-no-need-token",
     "match": {
       "methods": ["GET", "POST"],
       "url": "<https|http>://dev-api.mattex.com.hk/<account|login|register|confirmation><.*>"
@@ -31,7 +31,7 @@
     }
   },
   {
-    "id": "dev-mattex-identify-api-rule",
+    "id": "dev-emat-identify-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/api/v1/<.*>",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -54,7 +54,7 @@
     }
   },
   {
-    "id": "dev-mattex-supplier-api-rule",
+    "id": "dev-emat-supplier-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/supplier/api/v1/<.*>",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -122,7 +122,7 @@
     }
   },
   {
-    "id": "dev-authservice-oathkeeper",
+    "id": "dev-emat-authservice-oathkeeper",
     "match": {
       "url": "<https|http>://dev-api.auth.mattex.com.hk<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
@@ -138,7 +138,7 @@
     }
   },
   {
-    "id": "dev-oathkeeper",
+    "id": "dev-emat-oathkeeper",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
