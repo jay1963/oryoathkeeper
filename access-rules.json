@@ -15,7 +15,7 @@
     }
   },
   {
-    "id": "no-need-token",
+    "id": "dev-no-need-token",
     "match": {
       "methods": ["GET", "POST"],
       "url": "<https|http>://dev-api.mattex.com.hk/<account|login|register|confirmation><.*>"
@@ -31,7 +31,7 @@
     }
   },
   {
-    "id": "mattex-identify-api-rule",
+    "id": "dev-mattex-identify-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/api/v1/<.*>",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -54,33 +54,7 @@
     }
   },
   {
-    "id": "mattex-mmm-api-rule",
-    "match": {
-      "url": "<https|http>://dev-api.mattex.com.hk/mmm/api/v1/<.*>",
-      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
-    },
-    "authenticators": [{
-      "handler": "jwt",
-      "config": {
-        "required_scope": ["scope-a", "scope-b"]
-      }
-    }],
-    "authorizer": {
-      "handler": "allow"
-    },
-    "mutator": {
-      "handler": "cookie",
-      "config": {
-        "cookies": {
-          "user": "{{ print .Subject }}",
-          "user_id": "{{ print .Extra.uid }}",
-          "domain": "{{ print .Extra.domain }}"
-        }
-      }
-    }
-  },
-  {
-    "id": "mattex-supplier-api-rule",
+    "id": "dev-mattex-supplier-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/supplier/api/v1/<.*>",
       "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
@@ -106,7 +80,33 @@
     }
   },
   {
-    "id": "operation-mattex-tms-rule",
+    "id": "dev-operation-mattex-mmm-api-rule",
+    "match": {
+      "url": "<https|http>://dev-api.operation.mattex.com.hk/mmm/api/v1/<.*>",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "authenticators": [{
+      "handler": "jwt",
+      "config": {
+        "required_scope": ["scope-a", "scope-b"]
+      }
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "user": "{{ print .Subject }}",
+          "user_id": "{{ print .Extra.uid }}",
+          "domain": "{{ print .Extra.domain }}"
+        }
+      }
+    }
+  },
+  {
+    "id": "dev-operation-mattex-tms-rule",
     "match": {
       "url": "<https|http>://dev-tms.operation.mattex.com.hk<.*>",
       "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
@@ -122,10 +122,10 @@
     }
   },
   {
-    "id": "dev-auth-api-rule",
+    "id": "dev-authservice-oathkeeper",
     "match": {
       "url": "<https|http>://dev-api.auth.mattex.com.hk<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
     },
     "authenticators": [{
       "handler": "anonymous"
@@ -138,10 +138,10 @@
     }
   },
   {
-    "id": "oathkeeper-api-rule",
+    "id": "dev-oathkeeper",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/oathkeeper/<.*>",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"]
+      "methods": ["GET", "POST", "PUT", "DELETE", "PATCH"]
     },
     "authenticators": [{
       "handler": "anonymous"
