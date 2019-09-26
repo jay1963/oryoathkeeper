@@ -80,6 +80,64 @@
     }
   },
   {
+    "id": "dev-operation-api-frontend",
+    "match": {
+      "methods": ["OPTIONS"],
+      "url": "<https|http>://dev-api.operation.mattex.com.hk<.*>"
+    },
+    "authenticators": [{
+      "handler": "noop"
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "noop"
+    }
+  },
+  {
+    "id": "dev-operation-api-no-need-token",
+    "match": {
+      "methods": ["GET", "POST"],
+      "url": "<https|http>://dev-api.operation.mattex.com.hk/<account|login|register|confirmation><.*>"
+    },
+    "authenticators": [{
+      "handler": "noop"
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "noop"
+    }
+  },
+  {
+    "id": "dev-operation-mattex-tmm-api-rule",
+    "match": {
+      "url": "<https|http>://dev-api.operation.mattex.com.hk/tmm/api/v1/<.*>",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "authenticators": [{
+      "handler": "jwt",
+      "config": {
+        "required_scope": ["scope-a", "scope-b"]
+      }
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "user": "{{ print .Subject }}",
+          "user_id": "{{ print .Extra.uid }}",
+          "domain": "{{ print .Extra.domain }}"
+        }
+      }
+    }
+  },
+  {
     "id": "dev-operation-mattex-mmm-api-rule",
     "match": {
       "url": "<https|http>://dev-api.operation.mattex.com.hk/mmm/api/v1/<.*>",
