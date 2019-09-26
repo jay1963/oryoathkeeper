@@ -54,6 +54,32 @@
     }
   },
   {
+    "id": "dev-emat-tmm-api-rule",
+    "match": {
+      "url": "<https|http>://dev-api.mattex.com.hk/tmm/api/v1/<.*>",
+      "methods": ["GET", "POST", "PUT", "PATCH", "DELETE"]
+    },
+    "authenticators": [{
+      "handler": "jwt",
+      "config": {
+        "required_scope": ["scope-a", "scope-b"]
+      }
+    }],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutator": {
+      "handler": "cookie",
+      "config": {
+        "cookies": {
+          "user": "{{ print .Subject }}",
+          "user_id": "{{ print .Extra.uid }}",
+          "domain": "{{ print .Extra.domain }}"
+        }
+      }
+    }
+  },
+  {
     "id": "dev-emat-supplier-api-rule",
     "match": {
       "url": "<https|http>://dev-api.mattex.com.hk/supplier/api/v1/<.*>",
